@@ -11,9 +11,6 @@ Topic Trainer is a web application designed to help users test and enhance their
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
@@ -30,3 +27,40 @@ To run Topic Trainer locally on your machine, follow these steps:
    ```shell
     cd TopicTrainer
     ```
+   
+3. Set up the environment, for the nginx reverse proxy we use
+a local domain that must be set in the hosts file, this will add
+the host 'flask.test' to the hosts file, works on linux and macos,
+next, it will create an environment file from the .env.example file
+   
+   ```shell
+   make setup
+   ```
+
+4. Review the environment file and make any changes as needed
+**ENV** and **DEBUG** change how the application is built
+and run respectively, the default is development, which will run the application
+with the flask development server and will load the changes in real time.
+
+   ```shell
+   vim .env
+   ```
+
+5. Start the application
+
+   ```shell
+   make start
+   ```
+   
+6. Open your browser and navigate to [**Topic Trainer**](http://flask.test)
+
+## Additional Commands
+
+- `make stop` - Stop the application
+- `make restart` - Restart the application (rebuilds the containers)
+- `make logs` - View the application logs
+- `make lint` - Run the linter
+- `make clean` - Remove all containers, images, volumes, networks and cache (use with caution)
+- `make install-local` - Install the dependencies locally (useful for IDEs)
+
+

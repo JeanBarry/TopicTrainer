@@ -1,6 +1,8 @@
-.DS_Store
 venv
-.env
+.git
+.gitignore
+README.md
+Makefile
 .idea
 .vscode
 __pycache__

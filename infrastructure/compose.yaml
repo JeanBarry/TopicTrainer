@@ -4,14 +4,29 @@ services:
       context: ../
       dockerfile: ./infrastructure/dockerfile
       target: ${ENV}
+      args:
+        - UID=${UID}
+        - GID=${GID}
+        - UNAME=${UNAME}
+        - GNAME=${GNAME}
     container_name: app
-    env_file:
-      - ../.env
+    user: ${UID}:${GID}
+    environment:
+      - ENV=${ENV}
+      - DEBUG=${DEBUG}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
     ports:
       - "5000:5000"
     volumes:
       - ../main.py:/app/main.py
       - ../src:/app/src
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - topic-trainer-network
 
@@ -26,6 +41,26 @@ services:
       - app
     networks:
       - topic-trainer-network
+
+  db:
+    image: postgres:15.4-alpine
+    container_name: db
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - TZ=America/Mexico_City
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../db_data:/var/lib/postgresql/data
+    networks:
+      - topic-trainer-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
 networks:
   topic-trainer-network:
     driver: bridge

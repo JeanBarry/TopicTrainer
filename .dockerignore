@@ -7,3 +7,4 @@ Makefile
 .vscode
 __pycache__
 *.log
+db_data

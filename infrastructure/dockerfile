@@ -1,0 +1,19 @@
+FROM python:3.11.5-slim-bookworm as base
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY . .
+
+EXPOSE 5000
+
+FROM base as development
+
+CMD ["python3", "main.py"]
+
+FROM base as production
+
+CMD ["uwsgi", "--ini", "uwsgi.ini"]

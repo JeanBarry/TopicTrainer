@@ -39,3 +39,9 @@ generate-migration:
 
 migrate:
 	docker exec app sh -c "cd src/database && alembic upgrade head"
+
+rollback:
+	docker exec app sh -c "cd src/database && alembic downgrade -1"
+
+playground:
+	docker exec app sh -c "cd src/experiments && python3 playground.py"

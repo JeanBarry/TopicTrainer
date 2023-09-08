@@ -52,15 +52,33 @@ with the flask development server and will load the changes in real time.
    make start
    ```
    
-6. Open your browser and navigate to [**Topic Trainer**](http://flask.test)
+6. To run migrations on the database:
+    
+   ```shell
+   make migrate
+   ```
+   
+7. Open your browser and navigate to [**Topic Trainer**](http://flask.test)
 
 ## Additional Commands
 
 - `make stop` - Stop the application
 - `make restart` - Restart the application (rebuilds the containers)
-- `make logs` - View the application logs
-- `make lint` - Run the linter
 - `make clean` - Remove all containers, images, volumes, networks and cache (use with caution)
 - `make install-local` - Install the dependencies locally (useful for IDEs)
 
+**Development**
 
+- `make logs` - View the application logs
+- `make lint` - Run the linter
+- `make shell` - Open a shell in the application container
+- `make playground` - Runs the playground file (experiments/playground.py)
+to test new features conveniently
+- 
+
+**Database**
+
+- `make generate-migration` - Asks for a name and generates a migration file
+- `make migrate` - Run migrations on the database
+- `make rollback` - Rollback previous migration on the database
+- `make clean-database` - Removes mapped database files (use with caution)

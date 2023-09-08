@@ -8,4 +8,5 @@ if [ ! -d venv ]; then
 fi
 
 echo "Installing dependencies"
-venv/bin/pip install -r requirements.txt
+venv/bin/pip install -r requirements/base.txt
+venv/bin/pip install -r requirements/dev.txt

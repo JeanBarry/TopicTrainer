@@ -1,5 +1,6 @@
-# pylint: disable=not-callable
+# pylint: disable=not-callable, too-few-public-methods
 from enum import Enum as PythonEnum
+import uuid
 from sqlalchemy import Column, DateTime, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import UUID, VARCHAR, ENUM
@@ -41,6 +42,7 @@ class Topic(Base):
         :param description: str
         :param difficulty: str
         """
+        self.id = uuid.uuid4()  # pylint: disable=invalid-name
         self.name = name
         self.description = description
         self.difficulty = difficulty

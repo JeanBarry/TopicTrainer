@@ -3,3 +3,5 @@ from src.database.config import (
     postgres_host, postgres_password,
     postgres_port, postgres_user
 )
+
+from src.database.database import Database

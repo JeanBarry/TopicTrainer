@@ -13,9 +13,9 @@ RUN groupadd -f -g $GID $GNAME && \
 
 ENV PYTHONPATH=/app
 
-COPY requirements/base.txt .
+COPY requirements/base.txt requirements/base.txt
 
-RUN pip install -r base.txt
+RUN pip install -r requirements/base.txt
 
 COPY . .
 

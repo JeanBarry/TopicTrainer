@@ -1,10 +1,21 @@
 FROM python:3.11.5-slim-bookworm as base
 
+ARG UID
+ARG GID
+ARG UNAME
+ARG GNAME
+
 WORKDIR /app
 
-COPY requirements.txt .
+RUN groupadd -f -g $GID $GNAME && \
+    useradd -u $UID -g $GID $UNAME && \
+    chown -R $UNAME:$GNAME /app
 
-RUN pip install -r requirements.txt
+ENV PYTHONPATH=/app
+
+COPY requirements/base.txt .
+
+RUN pip install -r base.txt
 
 COPY . .
 
@@ -12,7 +23,11 @@ EXPOSE 5000
 
 FROM base as development
 
-CMD ["python3", "main.py"]
+RUN pip install -r requirements/dev.txt
+
+ENV PYLINTHOME=/app/.cache/pylint
+
+CMD ["sh", "scripts/dev-start.sh"]
 
 FROM base as production
 

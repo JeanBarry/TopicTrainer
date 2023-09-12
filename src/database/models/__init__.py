@@ -1,3 +1,6 @@
-from src.database.models.topic import Topic, metadata as topic_metadata
+from src.database.models.topic import Topic
+from src.database.models.question import Question
 
-models_metadata = [topic_metadata]
+from src.database.models.common import Base
+
+models_metadata = Base.metadata

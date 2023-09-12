@@ -1,12 +1,10 @@
 # pylint: disable=not-callable, too-few-public-methods
-from enum import Enum as PythonEnum
 import uuid
+from enum import Enum as PythonEnum
 from sqlalchemy import Column, DateTime, func
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID, VARCHAR, ENUM
-
-Base = declarative_base()
-metadata = Base.metadata
+from src.database.models.common import Base
 
 DIFFICULTY_ENUM_NAME = "difficulty_enum"
 
@@ -34,6 +32,8 @@ class Topic(Base):
     difficulty = Column(ENUM(DifficultyEnum, name=DIFFICULTY_ENUM_NAME), nullable=False)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, onupdate=func.now())
+
+    questions = relationship("Question", back_populates="topic")
 
     def __init__(self, name: str, description: str, difficulty: str) -> None:
         """

@@ -12,6 +12,17 @@ Topic Trainer is a web application designed to help users test and enhance their
 
 - [Installation](#installation)
 
+
+## Database Schema
+
+Database schemas is designed as follows:
+
+* A table for topics, each topic has a name, description and difficulty level (EASY, MEDIUM, HARD).
+* A table for questions, each question has a text and a foreign key to the topic it belongs to.
+* A table for answers, each answer has a text, a boolean value to indicate if it is correct and a foreign key to the question it belongs to.
+
+![Database Schema](documents/database_diagram.jpeg)
+
 ## Installation
 
 To run Topic Trainer locally on your machine, follow these steps:
@@ -74,7 +85,6 @@ with the flask development server and will load the changes in real time.
 - `make shell` - Open a shell in the application container
 - `make playground` - Runs the playground file (experiments/playground.py)
 to test new features conveniently
-- 
 
 **Database**
 

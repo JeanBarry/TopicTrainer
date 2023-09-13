@@ -22,7 +22,7 @@ topic_validator = Validator(schema)
 topic_creation_validator = Validator(creation_schema)
 
 
-def validate_topic_creation(topic) -> bool:
+def validate_topic_creation(topic: dict) -> bool:
     """
     Validate topic creation
     :param topic: Topic dict with all the required attributes

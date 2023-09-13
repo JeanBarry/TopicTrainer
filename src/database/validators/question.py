@@ -18,7 +18,7 @@ question_validator = Validator(schema)
 question_creation_validator = Validator(creation_schema)
 
 
-def validate_question_creation(question) -> bool:
+def validate_question_creation(question: dict) -> bool:
     """
     Validate question creation
     :param question: Question dict with all the required attributes

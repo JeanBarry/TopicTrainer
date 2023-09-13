@@ -20,6 +20,7 @@ class Question(Base):
     updated_at = Column(DateTime, onupdate=func.now())
 
     topic = relationship("Topic", back_populates="questions")
+    answers = relationship("Answer", back_populates="question")
 
     def __init__(self, topic_id: UUID, text: str) -> None:
         """

@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.database import database_url
+from src.database.config import database_url
 
 
 class Database:

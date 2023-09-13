@@ -75,5 +75,6 @@ class QuestionRepository:
                 session.refresh(question)
                 return question
             except SQLAlchemyError as error:
-                print(error)
+                session.rollback()
+                print(f"Error creating question: {error}")
                 return None

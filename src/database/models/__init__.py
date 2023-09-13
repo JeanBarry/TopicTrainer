@@ -1,5 +1,6 @@
 from src.database.models.topic import Topic
 from src.database.models.question import Question
+from src.database.models.answer import Answer
 
 from src.database.models.common import Base
 

@@ -44,6 +44,7 @@ class TopicRepository:
         :param kwargs: The topic attributes
 
         The topic attributes are:
+            technology: The topic technology
             name: The topic name
             description: The topic description
             difficulty: The topic difficulty ("easy", "medium", "hard")

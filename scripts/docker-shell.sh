@@ -9,4 +9,4 @@ fi
 . $(pwd)/.env
 
 # Exec inside the container
-docker exec -it -u "${UID}:${GID}" app sh
+docker exec -it -u "${UID}:${GID}" backend sh

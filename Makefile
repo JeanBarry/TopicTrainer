@@ -4,6 +4,9 @@ start:
 restart:
 	docker compose -f infrastructure/compose.yaml --env-file=.env up --build -d
 
+refresh:
+	docker compose -f infrastructure/compose.yaml --env-file=.env up -d
+
 stop:
 	docker compose -f infrastructure/compose.yaml --env-file=.env down
 
@@ -11,7 +14,7 @@ logs:
 	docker compose -f infrastructure/compose.yaml --env-file=.env logs -f
 
 lint:
-	docker exec app sh -c "pylint --rcfile=.pylintrc main.py src/" || true
+	docker exec backend sh -c "pylint --rcfile=.pylintrc main.py src/" || true
 
 clean:
 	sh scripts/docker-clean.sh
@@ -38,10 +41,10 @@ generate-migration:
 	sh scripts/generate-migration.sh
 
 migrate:
-	docker exec app sh -c "cd src/database && alembic upgrade head"
+	docker exec backend sh -c "cd src/database && alembic upgrade head"
 
 rollback:
-	docker exec app sh -c "cd src/database && alembic downgrade -1"
+	docker exec backend sh -c "cd src/database && alembic downgrade -1"
 
 playground:
-	docker exec app sh -c "cd src/experiments && python3 playground.py"
+	docker exec backend sh -c "cd src/experiments && python3 playground.py"

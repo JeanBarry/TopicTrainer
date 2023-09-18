@@ -1,6 +1,9 @@
 from cerberus import Validator
 
 schema = {
+    'technology': {
+        'type': 'string',
+    },
     'name': {
         'type': 'string',
     },

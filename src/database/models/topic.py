@@ -27,6 +27,7 @@ class Topic(Base):
     __tablename__ = "topics"
 
     id = Column(UUID(as_uuid=True), primary_key=True)
+    technology = Column(VARCHAR(255), nullable=False)
     name = Column(VARCHAR(255), nullable=False)
     description = Column(VARCHAR(255), nullable=False)
     difficulty = Column(ENUM(DifficultyEnum, name=DIFFICULTY_ENUM_NAME), nullable=False)
@@ -35,14 +36,17 @@ class Topic(Base):
 
     questions = relationship("Question", back_populates="topic")
 
-    def __init__(self, name: str, description: str, difficulty: str) -> None:
+    def __init__(self, technology: str, name: str, description: str, difficulty: str) -> None:
         """
         Initialize Topic model
+        :param technology: str
         :param name: str
         :param description: str
         :param difficulty: str
+        :return: None
         """
         self.id = uuid.uuid4()  # pylint: disable=invalid-name
+        self.technology = technology
         self.name = name
         self.description = description
         self.difficulty = difficulty
@@ -54,8 +58,24 @@ class Topic(Base):
         """
         return (f"<Topic(id={self.id}, "
                 f"name={self.name}, "
+                f"technology={self.technology}, "
                 f"description={self.description}, "
                 f"difficulty={self.difficulty}, "
                 f"created_at={self.created_at}, "
                 f"updated_at={self.updated_at})>"
                 )
+
+    def to_dict(self) -> dict:
+        """
+        Convert Topic model to dictionary
+        :return: dict
+        """
+        return {
+            "id": self.id,
+            "technology": self.technology,
+            "name": self.name,
+            "description": self.description,
+            "difficulty": self.difficulty.value,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
+        }

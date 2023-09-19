@@ -10,7 +10,9 @@ Topic Trainer is a web application designed to help users test and enhance their
 
 ## Table of Contents
 
+- [Database Schema](#database-schema)
 - [Installation](#installation)
+- [Additional Commands](#additional-commands)
 
 
 ## Database Schema
@@ -69,7 +71,9 @@ with the flask development server and will load the changes in real time.
    make migrate
    ```
    
-7. Open your browser and navigate to [**Topic Trainer**](http://flask.test)
+7. Open your browser and navigate to [**Topic Trainer**](http://flask.test:5000/api/doc) to see the API documentation.
+
+Documentation of the API is available on a swagger UI page.
 
 ## Additional Commands
 

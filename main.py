@@ -7,6 +7,8 @@ load_dotenv()
 app = create_app()
 
 if app_env != production:
+    from flask_cors import CORS
+    CORS(app)
     app.run(debug=True, host='0.0.0.0')
 
 application = app

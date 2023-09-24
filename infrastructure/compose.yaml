@@ -19,6 +19,11 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_PORT=${POSTGRES_PORT}
+      - S3_HOST=${S3_HOST}
+      - S3_PORT=${S3_PORT}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY}
+      - S3_SECRET_KEY=${S3_SECRET_KEY}
+      - S3_REGION=${S3_REGION}
     ports:
       - "5000:5000"
     volumes:
@@ -61,6 +66,26 @@ services:
       interval: 5s
       timeout: 10s
       retries: 5
+
+  minio:
+    image: quay.io/minio/minio:latest
+    container_name: minio
+    command: [ "server", "/data", "--console-address", ":9090" ]
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    environment:
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_KEY}
+      MINIO_REGION_NAME: ${S3_REGION}
+      MINIO_DOMAIN: ${S3_HOST}
+      MINIO_CORS_ENABLE: "true"
+      MINIO_CORS_ALLOW_ORIGIN: "*"
+    volumes:
+      - ../minio_data:/data
+    networks:
+      - topic-trainer-network
+
 networks:
   topic-trainer-network:
     driver: bridge

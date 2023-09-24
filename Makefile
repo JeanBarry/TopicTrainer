@@ -19,6 +19,7 @@ lint:
 clean:
 	sh scripts/docker-clean.sh
 	sh scripts/database-clean.sh
+	sh scripts/minio-clean.sh
 
 clean-database:
 	sh scripts/database-clean.sh
